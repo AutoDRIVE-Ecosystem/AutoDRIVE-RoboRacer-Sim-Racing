@@ -38,9 +38,11 @@ This directory hosts ROS 2 API (a meta-package), which supports modular algorith
     
       | Package               | Tested Version |
       |-----------------------|----------------|
-      | numpy                 | 1.13.3         |
-      | pillow                | 5.1.0          |
-      | opencv-contrib-python | 4.5.1.48       |
+      | attrdict              | 2.0.1          |
+      | numpy                 | 1.22.2         |
+      | pillow                | 9.0.1          |
+      | opencv-contrib-python | 4.10.0.84      |
+      | transforms3d          | 0.4.2          |
   
     - Install dependencies using `requirements.txt` file (use the file specific to your Python version &#8594; check using `python3 --version`):
 
@@ -48,6 +50,13 @@ This directory hosts ROS 2 API (a meta-package), which supports modular algorith
       $ pip3 install -r requirements_python_3.8.txt # Python 3.8
       $ pip3 install -r requirements_python_3.9.txt # Python 3.9
       $ pip3 install -r requirements_python_3.10.txt # Python 3.10
+      ```
+
+    - ROS 2 dependencies for data processing and visualization (usually any version will do the job):
+
+      ```bash
+      $ sudo apt install ros-$ROS_DISTRO-tf-transformations
+      $ sudo apt install ros-$ROS_DISTRO-imu-tools
       ```
 
 ## USAGE
