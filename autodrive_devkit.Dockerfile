@@ -23,9 +23,9 @@ RUN apt update \
 
 # Install Python dependencies
 RUN pip3 install attrdict
-RUN pip3 install numpy
+RUN pip3 install numpy==1.22.2
 RUN pip3 install pillow
-RUN pip3 install opencv-contrib-python
+RUN pip3 install opencv-contrib-python==4.10.0.84
 RUN pip3 install eventlet==0.33.3
 RUN pip3 install Flask==1.1.1
 RUN pip3 install Flask-SocketIO==4.1.0
