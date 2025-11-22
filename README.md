@@ -3,10 +3,10 @@
 ![Github Stars](https://img.shields.io/github/stars/AutoDRIVE-Ecosystem/AutoDRIVE-RoboRacer-Sim-Racing?style=flat&color=blue&label=stars&logo=github&logoColor=white)
 ![Github Forks](https://img.shields.io/github/forks/AutoDRIVE-Ecosystem/AutoDRIVE-RoboRacer-Sim-Racing?style=flat&color=blue&label=forks&logo=github&logoColor=white)
 ![Github Downloads](https://img.shields.io/github/downloads/AutoDRIVE-Ecosystem/AutoDRIVE-RoboRacer-Sim-Racing/total?style=flat&color=blue&label=downloads&logo=github&logoColor=white)
-![Sim Docker Stars](https://img.shields.io/docker/stars/autodriveecosystem/autodrive_roboracer_sim?style=flat&color=blue&label=stars&logo=docker&logoColor=white)
-![Sim Docker Pulls](https://img.shields.io/docker/pulls/autodriveecosystem/autodrive_roboracer_sim?style=flat&color=blue&label=pulls&logo=docker&logoColor=white)
-![API Docker Stars](https://img.shields.io/docker/stars/autodriveecosystem/autodrive_roboracer_api?style=flat&color=blue&label=stars&logo=docker&logoColor=white)
-![API Docker Pulls](https://img.shields.io/docker/pulls/autodriveecosystem/autodrive_roboracer_api?style=flat&color=blue&label=pulls&logo=docker&logoColor=white)
+![Sim Docker Stars](https://img.shields.io/docker/stars/autodriveecosystem/autodrive_roboracer_sim?style=flat&color=blue&label=sim-stars&logo=docker&logoColor=white)
+![Sim Docker Pulls](https://img.shields.io/docker/pulls/autodriveecosystem/autodrive_roboracer_sim?style=flat&color=blue&label=sim-pulls&logo=docker&logoColor=white)
+![API Docker Stars](https://img.shields.io/docker/stars/autodriveecosystem/autodrive_roboracer_api?style=flat&color=blue&label=api-stars&logo=docker&logoColor=white)
+![API Docker Pulls](https://img.shields.io/docker/pulls/autodriveecosystem/autodrive_roboracer_api?style=flat&color=blue&label=api-pulls&logo=docker&logoColor=white)
 
 ![AutoDRIVE-RoboRacer Sim-Racing](Banner.png)
 
