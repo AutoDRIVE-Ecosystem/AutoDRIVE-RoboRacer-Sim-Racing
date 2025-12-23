@@ -48,7 +48,7 @@ RUN apt update && apt install -y --no-install-recommends \
 RUN apt update --fix-missing \
     && apt install -y xvfb ffmpeg libgdal-dev libsm6 libxext6
 
-# Copy AutoDRIVE Devkit (ROS 2 API)
+# Set up AutoDRIVE Devkit (ROS 2 API)
 COPY autodrive_devkit/. /home/autodrive_devkit/src/autodrive_devkit
 RUN cd /home/autodrive_devkit && colcon build
 RUN /bin/bash -c 'echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc' \
