@@ -337,7 +337,7 @@ def bridge(sid, data):
         # Vehicle and simulation commands
         sio.emit('Bridge', data={'V1 Throttle': str(autodrive.throttle_command),
                                  'V1 Steering': str(autodrive.steering_command),
-                                 'Reset': str(autodrive.reset_command)
+                                 'V1 Reset': str(autodrive.reset_command)
                                  }
                 )
 
