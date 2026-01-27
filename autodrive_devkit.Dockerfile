@@ -5,7 +5,7 @@
 ####################################################
 
 # Set base image
-FROM osrf/ros:humble-desktop
+FROM ros:humble
 
 # Install Debian packages
 RUN apt update \
@@ -19,6 +19,8 @@ RUN apt update \
         unzip \
         net-tools \
         python3-pip \
+	ros-humble-rviz2 \
+	ros-humble-cv-bridge \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
