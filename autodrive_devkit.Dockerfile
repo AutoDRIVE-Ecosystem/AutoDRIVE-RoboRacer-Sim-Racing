@@ -19,8 +19,6 @@ RUN apt update \
         unzip \
         net-tools \
         python3-pip \
-	ros-humble-rviz2 \
-	ros-humble-cv-bridge \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
@@ -44,7 +42,9 @@ RUN pip3 install transforms3d
 # Install ROS 2 dependencies
 RUN apt update && apt install -y --no-install-recommends \
     ros-$ROS_DISTRO-tf-transformations \
-    ros-$ROS_DISTRO-imu-tools
+    ros-$ROS_DISTRO-imu-tools \
+    ros-$ROS_DISTRO-rviz2 \
+	ros-$ROS_DISTRO-cv-bridge \
 
 # Install tools for display
 RUN apt update --fix-missing \
