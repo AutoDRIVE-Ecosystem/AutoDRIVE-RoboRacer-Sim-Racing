@@ -138,7 +138,7 @@ def create_imu_msg(imu, orientation_quaternion, angular_velocity, linear_acceler
 def create_odom_msg(odom, position, orientation_quaternion, linear_velocity, angular_velocity):
     odom.header = Header()
     odom.header.stamp = autodrive_bridge.get_clock().now().to_msg()
-    odom.header.frame_id = 'roboracer_1'
+    odom.header.frame_id = 'world'
     odom.pose.pose.position.x = position[0]
     odom.pose.pose.position.y = position[1]
     odom.pose.pose.position.z = position[2]
