@@ -2,7 +2,7 @@
 
 ################################################################################
 
-# Copyright (c) 2025, Tinker Twins
+# Copyright (c) 2026, Tinker Twins
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -35,6 +35,7 @@ import tf2_ros # ROS bindings for tf2 library to handle transforms
 from std_msgs.msg import Int32, Float32, Header # Int32, Float32 and Header message classes
 from geometry_msgs.msg import Point, TransformStamped # Point and TransformStamped message classes
 from sensor_msgs.msg import JointState, Imu, LaserScan, Image # JointState, Imu, LaserScan and Image message classes
+from nav_msgs.msg import Odometry # Odometry message class
 from tf_transformations import quaternion_from_euler # Euler angle representation to quaternion representation
 from threading import Thread # Thread-based parallelism
 
@@ -59,11 +60,11 @@ class AutoDRIVE:
         self.id                       = 1
         self.throttle                 = 0
         self.steering                 = 0
-        self.speed                    = 0
         self.encoder_angles           = np.zeros(2, dtype=float)
         self.position                 = np.zeros(3, dtype=float)
         self.orientation_quaternion   = np.zeros(4, dtype=float)
         self.angular_velocity         = np.zeros(3, dtype=float)
+        self.linear_velocity          = np.zeros(3, dtype=float)
         self.linear_acceleration      = np.zeros(3, dtype=float)
         self.lidar_scan_rate          = 40
         self.lidar_range_array        = np.zeros(1080, dtype=float)
@@ -134,6 +135,37 @@ def create_imu_msg(imu, orientation_quaternion, angular_velocity, linear_acceler
     imu.linear_acceleration_covariance = [0.0025, 0.0, 0.0, 0.0, 0.0025, 0.0, 0.0, 0.0, 0.0025]
     return imu
 
+def create_odom_msg(odom, position, orientation_quaternion, linear_velocity, angular_velocity):
+    odom.header = Header()
+    odom.header.stamp = autodrive_bridge.get_clock().now().to_msg()
+    odom.header.frame_id = 'roboracer_1'
+    odom.pose.pose.position.x = position[0]
+    odom.pose.pose.position.y = position[1]
+    odom.pose.pose.position.z = position[2]
+    odom.pose.pose.orientation.x = orientation_quaternion[0]
+    odom.pose.pose.orientation.y = orientation_quaternion[1]
+    odom.pose.pose.orientation.z = orientation_quaternion[2]
+    odom.pose.pose.orientation.w = orientation_quaternion[3]
+    odom.pose.covariance = [0.0025, 0.0, 0.0, 0.0, 0.0, 0.0,
+                            0.0, 0.0025, 0.0, 0.0, 0.0, 0.0,
+                            0.0, 0.0, 0.0025, 0.0, 0.0, 0.0,
+                            0.0, 0.0, 0.0, 0.0025, 0.0, 0.0,
+                            0.0, 0.0, 0.0, 0.0, 0.0025, 0.0,
+                            0.0, 0.0, 0.0, 0.0, 0.0, 0.0025]
+    odom.twist.twist.linear.x = linear_velocity[0]
+    odom.twist.twist.linear.y = linear_velocity[1]
+    odom.twist.twist.linear.z = linear_velocity[2]
+    odom.twist.twist.angular.x = angular_velocity[0]
+    odom.twist.twist.angular.y = angular_velocity[1]
+    odom.twist.twist.angular.z = angular_velocity[2]
+    odom.twist.covariance = [0.0025, 0.0, 0.0, 0.0, 0.0, 0.0,
+                             0.0, 0.0025, 0.0, 0.0, 0.0, 0.0,
+                             0.0, 0.0, 0.0025, 0.0, 0.0, 0.0,
+                             0.0, 0.0, 0.0, 0.0025, 0.0, 0.0,
+                             0.0, 0.0, 0.0, 0.0, 0.0025, 0.0,
+                             0.0, 0.0, 0.0, 0.0, 0.0, 0.0025]
+    return odom
+
 def create_laserscan_msg(ls, lidar_scan_rate, lidar_range_array, lidar_intensity_array):
     ls.header = Header()
     ls.header.stamp = autodrive_bridge.get_clock().now().to_msg()
@@ -185,7 +217,6 @@ def broadcast_transforms(tf_broadcaster, autodrive):
     tf_list.append(create_tf_msg("rear_right_wheel", "roboracer_1", np.asarray([0.0, -0.118, 0.0]), quaternion_from_euler(0.0, autodrive.encoder_angles[1]%6.283, 0.0)))
     tf_broadcaster.sendTransform(tf_list)
 
-
 #########################################################
 # ROS 2 MESSAGE DEFINITIONS
 #########################################################
@@ -195,6 +226,7 @@ msg_float32 = Float32()
 msg_jointstate = JointState()
 msg_point = Point()
 msg_imu = Imu()
+msg_odom = Odometry()
 msg_laserscan = LaserScan()
 msg_transform = TransformStamped()
 
@@ -208,9 +240,6 @@ def publish_actuator_feedbacks(throttle, steering):
     publishers['pub_throttle'].publish(create_float_msg(msg_float32, throttle))
     publishers['pub_steering'].publish(create_float_msg(msg_float32, steering))
 
-def publish_speed_data(speed):
-    publishers['pub_speed'].publish(create_float_msg(msg_float32, speed))
-
 def publish_encoder_data(encoder_angles):
     publishers['pub_left_encoder'].publish(create_joint_state_msg(msg_jointstate, encoder_angles[0], "left_encoder", "left_encoder"))
     publishers['pub_right_encoder'].publish(create_joint_state_msg(msg_jointstate, encoder_angles[1], "right_encoder", "right_encoder"))
@@ -220,6 +249,9 @@ def publish_ips_data(position):
 
 def publish_imu_data(orientation_quaternion, angular_velocity, linear_acceleration):
     publishers['pub_imu'].publish(create_imu_msg(msg_imu, orientation_quaternion, angular_velocity, linear_acceleration))
+
+def publish_odometery_data(position, orientation_quaternion, linear_velocity, angular_velocity):
+    publishers['pub_odometer'].publish(create_odom_msg(msg_odom, position, orientation_quaternion, linear_velocity, angular_velocity))
 
 def publish_lidar_scan(lidar_scan_rate, lidar_range_array, lidar_intensity_array):
     publishers['pub_lidar'].publish(create_laserscan_msg(msg_laserscan, lidar_scan_rate, lidar_range_array.tolist(), lidar_intensity_array.tolist()))
@@ -286,8 +318,6 @@ def bridge(sid, data):
         # Actuator feedbacks
         autodrive.throttle = float(data["V1 Throttle"])
         autodrive.steering = float(data["V1 Steering"])
-        # Speed
-        autodrive.speed = float(data["V1 Speed"])
         # Wheel encoders
         autodrive.encoder_angles = np.fromstring(data["V1 Encoder Angles"], dtype=float, sep=' ')
         # IPS
@@ -296,6 +326,8 @@ def bridge(sid, data):
         autodrive.orientation_quaternion = np.fromstring(data["V1 Orientation Quaternion"], dtype=float, sep=' ')
         autodrive.angular_velocity = np.fromstring(data["V1 Angular Velocity"], dtype=float, sep=' ')
         autodrive.linear_acceleration = np.fromstring(data["V1 Linear Acceleration"], dtype=float, sep=' ')
+        # Speedometer
+        autodrive.linear_velocity = np.fromstring(data["V1 Linear Velocity"], dtype=float, sep=' ')
         # LIDAR
         autodrive.lidar_scan_rate = float(data["V1 LIDAR Scan Rate"])
         autodrive.lidar_range_array = np.fromstring(gzip.decompress(base64.b64decode(data["V1 LIDAR Range Array"])).decode('utf-8'), sep='\n')
@@ -310,14 +342,14 @@ def bridge(sid, data):
 
         # Actuator feedbacks
         publish_actuator_feedbacks(autodrive.throttle, autodrive.steering)
-        # Speed
-        publish_speed_data(autodrive.speed)
         # Wheel encoders
         publish_encoder_data(autodrive.encoder_angles)
         # IPS
         publish_ips_data(autodrive.position)
         # IMU
         publish_imu_data(autodrive.orientation_quaternion, autodrive.angular_velocity, autodrive.linear_acceleration)
+        # Odometry
+        publish_odometery_data(autodrive.position, autodrive.orientation_quaternion, autodrive.linear_velocity, autodrive.angular_velocity)
         # Coordinate transforms
         broadcast_transforms(transform_broadcaster, autodrive)
         # LIDAR
@@ -337,7 +369,7 @@ def bridge(sid, data):
         # Vehicle and simulation commands
         sio.emit('Bridge', data={'V1 Throttle': str(autodrive.throttle_command),
                                  'V1 Steering': str(autodrive.steering_command),
-                                 'Reset': str(autodrive.reset_command)
+                                 'V1 Reset': str(autodrive.reset_command)
                                  }
                 )
 
@@ -349,26 +381,16 @@ def bridge(sid, data):
 #     global autodrive
 #     # Actuator feedbacks
 #     publish_actuator_feedbacks(autodrive.throttle, autodrive.steering)
-#     # Speed
-#     publish_speed_data(autodrive.speed)
 #     # Wheel encoders
 #     publish_encoder_data(autodrive.encoder_angles)
 #     # IPS
 #     publish_ips_data(autodrive.position)
 #     # IMU
 #     publish_imu_data(autodrive.orientation_quaternion, autodrive.angular_velocity, autodrive.linear_acceleration)
+#     # Odometry
+#     publish_odometery_data(autodrive.position, autodrive.orientation_quaternion, autodrive.linear_velocity, autodrive.angular_velocity)
 #     # Coordinate transforms
-#     broadcast_transform(msg_transform, transform_broadcaster, "roboracer_1", "world", autodrive.position, autodrive.orientation_quaternion) # Vehicle frame defined at center of rear axle
-#     broadcast_transform(msg_transform, transform_broadcaster, "left_encoder", "roboracer_1", np.asarray([0.0, 0.12, 0.0]), quaternion_from_euler(0.0, 120*autodrive.encoder_angles[0]%6.283, 0.0))
-#     broadcast_transform(msg_transform, transform_broadcaster, "right_encoder", "roboracer_1", np.asarray([0.0, -0.12, 0.0]), quaternion_from_euler(0.0, 120*autodrive.encoder_angles[1]%6.283, 0.0))
-#     broadcast_transform(msg_transform, transform_broadcaster, "ips", "roboracer_1", np.asarray([0.08, 0.0, 0.055]), np.asarray([0.0, 0.0, 0.0, 1.0]))
-#     broadcast_transform(msg_transform, transform_broadcaster, "imu", "roboracer_1", np.asarray([0.08, 0.0, 0.055]), np.asarray([0.0, 0.0, 0.0, 1.0]))
-#     broadcast_transform(msg_transform, transform_broadcaster, "lidar", "roboracer_1", np.asarray([0.2733, 0.0, 0.096]), np.asarray([0.0, 0.0, 0.0, 1.0]))
-#     broadcast_transform(msg_transform, transform_broadcaster, "front_camera", "roboracer_1", np.asarray([-0.015, 0.0, 0.15]), np.asarray([0, 0.0871557, 0, 0.9961947]))
-#     broadcast_transform(msg_transform, transform_broadcaster, "front_left_wheel", "roboracer_1", np.asarray([0.33, 0.118, 0.0]), quaternion_from_euler(0.0, 0.0, np.arctan((2*0.141537*np.tan(autodrive.steering))/(2*0.141537-2*0.0765*np.tan(autodrive.steering)))))
-#     broadcast_transform(msg_transform, transform_broadcaster, "front_right_wheel", "roboracer_1", np.asarray([0.33, -0.118, 0.0]), quaternion_from_euler(0.0, 0.0, np.arctan((2*0.141537*np.tan(autodrive.steering))/(2*0.141537+2*0.0765*np.tan(autodrive.steering)))))
-#     broadcast_transform(msg_transform, transform_broadcaster, "rear_left_wheel", "roboracer_1", np.asarray([0.0, 0.118, 0.0]), quaternion_from_euler(0.0, autodrive.encoder_angles[0]%6.283, 0.0))
-#     broadcast_transform(msg_transform, transform_broadcaster, "rear_right_wheel", "roboracer_1", np.asarray([0.0, -0.118, 0.0]), quaternion_from_euler(0.0, autodrive.encoder_angles[1]%6.283, 0.0))
+#     broadcast_transforms(transform_broadcaster, autodrive)
 #     # LIDAR
 #     publish_lidar_scan(autodrive.lidar_scan_rate, autodrive.lidar_range_array, autodrive.lidar_intensity_array)
 #     # Cameras

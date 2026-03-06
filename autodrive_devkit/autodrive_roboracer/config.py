@@ -2,7 +2,7 @@
 
 ################################################################################
 
-# Copyright (c) 2025, Tinker Twins
+# Copyright (c) 2026, Tinker Twins
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -32,6 +32,7 @@
 from std_msgs.msg import Int32, Float32, Bool # Int32, Float32 and Bool message classes
 from geometry_msgs.msg import Point # Point message class
 from sensor_msgs.msg import JointState, Imu, LaserScan, Image # JointState, Imu, LaserScan and Image message classes
+from nav_msgs.msg import Odometry # Odometry message class
 
 # Python mudule imports
 try: # Mapping objects that allow their elements to be accessed both as keys and as attributes
@@ -56,11 +57,11 @@ pub_sub_dict = AttrDict({
     'publishers': [
         {'topic': '/autodrive/roboracer_1/throttle', 'type': Float32, 'name': 'pub_throttle'},
         {'topic': '/autodrive/roboracer_1/steering', 'type': Float32, 'name': 'pub_steering'},
-        {'topic': '/autodrive/roboracer_1/speed', 'type': Float32, 'name': 'pub_speed'},
         {'topic': '/autodrive/roboracer_1/left_encoder', 'type': JointState, 'name': 'pub_left_encoder'},
         {'topic': '/autodrive/roboracer_1/right_encoder', 'type': JointState, 'name': 'pub_right_encoder'},
         {'topic': '/autodrive/roboracer_1/ips', 'type': Point, 'name': 'pub_ips'},
         {'topic': '/autodrive/roboracer_1/imu', 'type': Imu, 'name': 'pub_imu'},
+        {'topic': '/autodrive/roboracer_1/odom', 'type': Odometry, 'name': 'pub_odometer'},
         {'topic': '/autodrive/roboracer_1/lidar', 'type': LaserScan, 'name': 'pub_lidar'},
         {'topic': '/autodrive/roboracer_1/front_camera', 'type': Image, 'name': 'pub_front_camera'},
         {'topic': '/autodrive/roboracer_1/lap_count', 'type': Int32, 'name': 'pub_lap_count'},

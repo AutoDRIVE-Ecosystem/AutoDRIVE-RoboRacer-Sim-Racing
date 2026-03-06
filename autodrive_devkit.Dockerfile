@@ -44,7 +44,7 @@ RUN apt update && apt install -y --no-install-recommends \
     ros-$ROS_DISTRO-tf-transformations \
     ros-$ROS_DISTRO-imu-tools \
     ros-$ROS_DISTRO-rviz2 \
-	ros-$ROS_DISTRO-cv-bridge \
+	ros-$ROS_DISTRO-cv-bridge
 
 # Install tools for display
 RUN apt update --fix-missing \
