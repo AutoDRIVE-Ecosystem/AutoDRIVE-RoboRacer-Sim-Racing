@@ -1,10 +1,5 @@
 {
   "configById": {
-    "NodePlayground!2z6fhq3": {
-      "selectedNodeId": "125add07-11e4-46e5-8c4e-84954294e443",
-      "autoFormatOnSave": true,
-      "foxglovePanelTitle": "Scripts"
-    },
     "Image!3mnp456": {
       "cameraState": {
         "distance": 20,
@@ -50,15 +45,16 @@
         "poseEstimateThetaDeviation": 0.26179939
       },
       "imageMode": {
-        "imageTopic": "/autodrive/f1tenth_1/front_camera"
+        "imageTopic": "/autodrive/roboracer_1/front_camera"
       },
-      "foxglovePanelTitle": "Camera Feed"
+      "foxglovePanelTitle": "Camera Feed",
+      "synchronize": false
     },
     "Plot!2o3cq5y": {
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.linear_acceleration.y",
+          "value": "/autodrive/roboracer_1/imu.linear_acceleration.y",
           "enabled": true,
           "color": "#4e98e2",
           "lineSize": 5,
@@ -78,7 +74,7 @@
       "sidebarDimension": 240,
       "foxglovePanelTitle": "G-G Diagram (m/s²)",
       "xAxisPath": {
-        "value": "/autodrive/f1tenth_1/imu.linear_acceleration.x"
+        "value": "/autodrive/roboracer_1/imu.linear_acceleration.x"
       },
       "minXValue": -10,
       "maxXValue": 10
@@ -88,43 +84,48 @@
       "diffMethod": "custom",
       "diffTopicPath": "",
       "showFullMessageForDiff": false,
-      "topicPath": "/autodrive/f1tenth_1/lap_time.data",
-      "fontSize": 12
+      "topicPath": "/autodrive/roboracer_1/lap_time.data",
+      "fontSize": 12,
+      "defaultExpanded": false
     },
     "RawMessages!1xpmrqn": {
       "diffEnabled": false,
       "diffMethod": "custom",
       "diffTopicPath": "",
       "showFullMessageForDiff": false,
-      "topicPath": "/autodrive/f1tenth_1/last_lap_time.data",
-      "fontSize": 12
+      "topicPath": "/autodrive/roboracer_1/last_lap_time.data",
+      "fontSize": 12,
+      "defaultExpanded": false
     },
     "RawMessages!391tcg2": {
       "diffEnabled": false,
       "diffMethod": "custom",
       "diffTopicPath": "",
       "showFullMessageForDiff": false,
-      "topicPath": "/autodrive/f1tenth_1/best_lap_time.data",
-      "fontSize": 12
+      "topicPath": "/autodrive/roboracer_1/best_lap_time.data",
+      "fontSize": 12,
+      "defaultExpanded": false
     },
     "RawMessages!2walsj0": {
       "diffEnabled": false,
       "diffMethod": "custom",
       "diffTopicPath": "",
       "showFullMessageForDiff": false,
-      "topicPath": "/autodrive/f1tenth_1/race_time.data",
-      "fontSize": 12
+      "topicPath": "/autodrive/roboracer_1/race_time.data",
+      "fontSize": 12,
+      "defaultExpanded": false
     },
     "RawMessages!45bncjc": {
       "diffEnabled": false,
       "diffMethod": "custom",
       "diffTopicPath": "",
       "showFullMessageForDiff": false,
-      "topicPath": "/autodrive/f1tenth_1/adjusted_race_time.data",
-      "fontSize": 12
+      "topicPath": "/autodrive/roboracer_1/adjusted_race_time.data",
+      "fontSize": 12,
+      "defaultExpanded": false
     },
     "Gauge!404t1lv": {
-      "path": "/autodrive/f1tenth_1/speed.data",
+      "path": "/autodrive/roboracer_1/odom.twist.twist.linear.x",
       "minValue": 0,
       "maxValue": 7,
       "colorMap": "red-yellow-green",
@@ -134,10 +135,14 @@
         "#ff00ff"
       ],
       "reverse": true,
-      "foxglovePanelTitle": "Speed"
+      "foxglovePanelTitle": "Speed",
+      "reverseDirection": false,
+      "style": "dial",
+      "tickInterval": 0.1,
+      "showTicks": false
     },
     "Gauge!2mvbrue": {
-      "path": "/autodrive/f1tenth_1/throttle.data",
+      "path": "/autodrive/roboracer_1/throttle.data",
       "minValue": -1,
       "maxValue": 1,
       "colorMap": "red-yellow-green",
@@ -147,10 +152,14 @@
         "#ff0000ff"
       ],
       "reverse": false,
-      "foxglovePanelTitle": "Throttle"
+      "foxglovePanelTitle": "Throttle",
+      "reverseDirection": false,
+      "style": "dial",
+      "tickInterval": 0.1,
+      "showTicks": false
     },
     "Gauge!4fcxi9p": {
-      "path": "/autodrive/f1tenth_1/steering.data",
+      "path": "/autodrive/roboracer_1/steering.data",
       "minValue": -1,
       "maxValue": 1,
       "colorMap": "red-yellow-green",
@@ -160,7 +169,11 @@
         "#ff0000ff"
       ],
       "reverse": false,
-      "foxglovePanelTitle": "Steering"
+      "foxglovePanelTitle": "Steering",
+      "reverseDirection": false,
+      "style": "dial",
+      "tickInterval": 0.1,
+      "showTicks": false
     },
     "3D!18i6zy7": {
       "layers": {
@@ -188,19 +201,18 @@
         }
       },
       "cameraState": {
+        "distance": 10.807201753242536,
         "perspective": true,
-        "distance": 11.974738784758133,
-        "phi": 59.32202060580353,
-        "thetaOffset": 37.41329099489547,
-        "targetOffset": [
-          -2.2450946401700262,
-          -6.635788011059999,
-          -6.261110062173574e-17
-        ],
+        "phi": 59.322020605802564,
         "target": [
           0,
           0,
           0
+        ],
+        "targetOffset": [
+          -1.265907231541098,
+          -4.0301152181193896,
+          -2.68552534013575e-16
         ],
         "targetOrientation": [
           0,
@@ -208,6 +220,7 @@
           0,
           1
         ],
+        "thetaOffset": 37.413290994897245,
         "fovy": 45,
         "near": 0.5,
         "far": 5000,
@@ -222,8 +235,8 @@
         "transforms": {
           "showLabel": true,
           "enablePreloading": true,
-          "axisScale": 1,
-          "lineWidth": 0
+          "lineWidth": 0,
+          "axisSize": 0.2
         }
       },
       "transforms": {},
@@ -243,6 +256,21 @@
         },
         "/autodrive/f1tenth_1/front_camera": {
           "visible": false
+        },
+        "/autodrive/roboracer_1/lidar": {
+          "visible": true,
+          "colorField": "range",
+          "colorMode": "gradient",
+          "colorMap": "turbo",
+          "flatColor": "#ff0000ff",
+          "gradient": [
+            "#ff0000ff",
+            "#fcb2b2ff"
+          ],
+          "decayTime": 60
+        },
+        "/autodrive/roboracer_1/front_camera": {
+          "visible": false
         }
       },
       "publish": {
@@ -256,17 +284,18 @@
       },
       "imageMode": {},
       "foxglovePanelTitle": "3D View",
-      "followTf": "world"
+      "followTf": "world",
+      "synchronize": false
     },
     "StateTransitions!skq076": {
       "paths": [
         {
-          "value": "/autodrive/f1tenth_1/lap_count.data",
+          "value": "/autodrive/roboracer_1/lap_count.data",
           "timestampMethod": "receiveTime",
           "label": "Lap Count"
         },
         {
-          "value": "/autodrive/f1tenth_1/collision_count.data",
+          "value": "/autodrive/roboracer_1/collision_count.data",
           "timestampMethod": "receiveTime",
           "label": "Collision Count"
         }
@@ -276,7 +305,7 @@
       "showPoints": false
     },
     "Indicator!2upo9en": {
-      "path": "/autodrive/f1tenth_1/lap_count.data",
+      "path": "/autodrive/roboracer_1/lap_count.data",
       "style": "background",
       "fallbackColor": "#00ff00",
       "fallbackLabel": "Race Lap",
@@ -298,7 +327,7 @@
       "fontSize": 36
     },
     "Indicator!2e4orhp": {
-      "path": "/autodrive/f1tenth_1/qualification_status.data",
+      "path": "/autodrive/roboracer_1/qualification_status.data",
       "style": "background",
       "fallbackColor": "#ff0000",
       "fallbackLabel": "Disqualified",
@@ -317,7 +346,7 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/throttle.data",
+          "value": "/autodrive/roboracer_1/throttle.data",
           "enabled": true,
           "color": "#4e98e2",
           "label": "Throttle"
@@ -337,7 +366,7 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/steering.data",
+          "value": "/autodrive/roboracer_1/steering.data",
           "enabled": true,
           "color": "#4e98e2",
           "label": "Steering"
@@ -357,21 +386,21 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/ips.x",
+          "value": "/autodrive/roboracer_1/ips.x",
           "enabled": true,
           "color": "#4e98e2",
           "label": "X"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/ips.y",
+          "value": "/autodrive/roboracer_1/ips.y",
           "enabled": true,
           "color": "#f5774d",
           "label": "Y"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/ips.z",
+          "value": "/autodrive/roboracer_1/ips.z",
           "enabled": true,
           "color": "#f7df71",
           "label": "Z"
@@ -391,28 +420,28 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.orientation.w",
+          "value": "/autodrive/roboracer_1/imu.orientation.w",
           "enabled": true,
           "color": "#4e98e2",
           "label": "W"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.orientation.x",
+          "value": "/autodrive/roboracer_1/imu.orientation.x",
           "enabled": true,
           "color": "#f5774d",
           "label": "X"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.orientation.y",
+          "value": "/autodrive/roboracer_1/imu.orientation.y",
           "enabled": true,
           "color": "#f7df71",
           "label": "Y"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.orientation.z",
+          "value": "/autodrive/roboracer_1/imu.orientation.z",
           "enabled": true,
           "color": "#5cd6a9",
           "label": "Z"
@@ -432,21 +461,21 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.angular_velocity.x",
+          "value": "/autodrive/roboracer_1/imu.angular_velocity.x",
           "enabled": true,
           "color": "#4e98e2",
           "label": "X"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.angular_velocity.y",
+          "value": "/autodrive/roboracer_1/imu.angular_velocity.y",
           "enabled": true,
           "color": "#f5774d",
           "label": "Y"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.angular_velocity.z",
+          "value": "/autodrive/roboracer_1/imu.angular_velocity.z",
           "enabled": true,
           "color": "#f7df71",
           "label": "Z"
@@ -466,21 +495,21 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.linear_acceleration.x",
+          "value": "/autodrive/roboracer_1/imu.linear_acceleration.x",
           "enabled": true,
           "color": "#4e98e2",
           "label": "X"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.linear_acceleration.y",
+          "value": "/autodrive/roboracer_1/imu.linear_acceleration.y",
           "enabled": true,
           "color": "#f5774d",
           "label": "Y"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/imu.linear_acceleration.z",
+          "value": "/autodrive/roboracer_1/imu.linear_acceleration.z",
           "enabled": true,
           "color": "#f7df71",
           "label": "Z"
@@ -500,10 +529,10 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/speed.data",
+          "value": "/autodrive/roboracer_1/odom.twist.twist.linear.x",
           "enabled": true,
           "color": "#4e98e2",
-          "label": "Speed"
+          "label": "X"
         }
       ],
       "showXAxisLabels": true,
@@ -520,14 +549,14 @@
       "paths": [
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/left_encoder.position[:]",
+          "value": "/autodrive/roboracer_1/left_encoder.position[:]",
           "enabled": true,
           "color": "#4e98e2",
           "label": "L"
         },
         {
           "timestampMethod": "receiveTime",
-          "value": "/autodrive/f1tenth_1/right_encoder.position[:]",
+          "value": "/autodrive/roboracer_1/right_encoder.position[:]",
           "enabled": true,
           "color": "#f5774d",
           "label": "R"
@@ -544,14 +573,10 @@
       "foxglovePanelTitle": "Wheel Rotation (rad)"
     },
     "Tab!47y3dil": {
-      "activeTabIdx": 1,
+      "activeTabIdx": 0,
       "tabs": [
         {
-          "title": "Configure",
-          "layout": "NodePlayground!2z6fhq3"
-        },
-        {
-          "title": "Visualize",
+          "title": "AutoDRIVE RoboRacer",
           "layout": {
             "first": {
               "first": "Image!3mnp456",
@@ -662,15 +687,15 @@
   "globalVariables": {},
   "userNodes": {
     "cec2ab24-3fb7-4faf-b079-3ff35cf0d557": {
-      "sourceCode": "import { Input, Message } from \"./types\";\n\ntype Output = {\n  data: boolean; // Qualification status\n};\n\n// Input topics\nexport const inputs = [\n  \"/autodrive/f1tenth_1/lap_count\",\n  \"/autodrive/f1tenth_1/collision_count\",\n];\n\n// Output topic\nexport const output = \"/autodrive/f1tenth_1/qualification_status\";\n\n// Variables\nlet lapCount = 0;\nlet collisionCount = 0;\nlet collisionsDuringWarmup = 0; // Collisions during warmup lap (0)\nlet collisionsDuringRace = 0; // Collisions during race laps (1-10)\n\n// Script\nexport default function script(\n  event:\n    | Input<\"/autodrive/f1tenth_1/lap_count\">\n    | Input<\"/autodrive/f1tenth_1/collision_count\">,\n): Output {\n  if (event.topic === \"/autodrive/f1tenth_1/lap_count\") {\n    // Read event.message fields expected for /autodrive/f1tenth_1/lap_count messages\n    lapCount = event.message.data;\n  } else {\n    // Read event.message fields expected for /autodrive/f1tenth_1/collision_count messages\n    collisionCount = event.message.data;\n  }\n\n  // Debugging\n  // log(event.message.data);\n\n  // Define the qualification status logic\n  let qualificationStatus = true;\n\n  if (lapCount < 1) {\n    // Ignore collisions during warmup lap (0)\n    collisionsDuringRace = 0;\n    collisionsDuringWarmup = collisionCount;\n    qualificationStatus = true;\n  } else if (lapCount >= 1 && lapCount <= 10) {\n    // Calculate collisions during race laps (1 to 10)\n    collisionsDuringRace = collisionCount - collisionsDuringWarmup;\n    qualificationStatus = collisionsDuringRace <= 10;\n  }\n\n  // Debugging\n  // log(collisionsDuringWarmup);\n  // log(collisionsDuringRace);\n  // log(qualificationStatus);\n\n  // Return the qualification status as the output\n  return {\n    data: qualificationStatus,\n  };\n}\n",
+      "sourceCode": "import { Input, Message } from \"./types\";\n\ntype Output = {\n  data: boolean; // Qualification status\n};\n\n// Input topics\nexport const inputs = [\n  \"/autodrive/roboracer_1/lap_count\",\n  \"/autodrive/roboracer_1/collision_count\",\n];\n\n// Output topic\nexport const output = \"/autodrive/roboracer_1/qualification_status\";\n\n// Variables\nlet lapCount = 0;\nlet collisionCount = 0;\nlet collisionsDuringWarmup = 0; // Collisions during warmup lap (0)\nlet collisionsDuringRace = 0; // Collisions during race laps (1-10)\n\n// Script\nexport default function script(\n  event:\n    | Input<\"/autodrive/roboracer_1/lap_count\">\n    | Input<\"/autodrive/roboracer_1/collision_count\">,\n): Output {\n  if (event.topic === \"/autodrive/roboracer_1/lap_count\") {\n    // Read event.message fields expected for /autodrive/roboracer_1/lap_count messages\n    lapCount = (event.message as { data: number }).data;\n  } else {\n    // Read event.message fields expected for /autodrive/roboracer_1/collision_count messages\n    collisionCount = (event.message as { data: number }).data;\n  }\n\n  // Debugging\n  // log(event.message.data);\n\n  // Define the qualification status logic\n  let qualificationStatus = true;\n\n  if (lapCount < 1) {\n    // Ignore collisions during warmup lap (0)\n    collisionsDuringRace = 0;\n    collisionsDuringWarmup = collisionCount;\n    qualificationStatus = true;\n  } else if (lapCount >= 1 && lapCount <= 10) {\n    // Calculate collisions during race laps (1 to 10)\n    collisionsDuringRace = collisionCount - collisionsDuringWarmup;\n    qualificationStatus = collisionsDuringRace <= 10;\n  }\n\n  // Debugging\n  // log(collisionsDuringWarmup);\n  // log(collisionsDuringRace);\n  // log(qualificationStatus);\n\n  // Return the qualification status as the output\n  return {\n    data: qualificationStatus,\n  };\n}\n",
       "name": "Qualification Status"
     },
     "a5eb1ac9-8dba-4b05-8e9f-a0c3ecdc3953": {
-      "sourceCode": "import { Input, Message } from \"./types\";\n\ntype Output = {\n  data: number; // Race time (seconds)\n};\n\n// Input topics\nexport const inputs = [\n  \"/autodrive/f1tenth_1/lap_count\",\n  \"/autodrive/f1tenth_1/last_lap_time\",\n];\n\n// Output topic\nexport const output = \"/autodrive/f1tenth_1/race_time\";\n\n// Variables\nlet lapCount = 0;\nlet lastLapCount = -1; // Track the previous lap count\nlet lastLapTime = 0; // Track the previous lap time\nlet raceTime = 0; // Time elapsed during race laps (1-10)\n\n// Script\nexport default function script(\n  event:\n    | Input<\"/autodrive/f1tenth_1/lap_count\">\n    | Input<\"/autodrive/f1tenth_1/last_lap_time\">,\n): Output {\n  if (event.topic === \"/autodrive/f1tenth_1/lap_count\") {\n    // Read event.message fields expected for /autodrive/f1tenth_1/lap_count messages\n    lapCount = event.message.data;\n  } else {\n    // Read event.message fields expected for /autodrive/f1tenth_1/last_lap_time messages\n    lastLapTime = event.message.data;\n  }\n\n  // Debugging\n  // log(event.message.data);\n\n  // Check time only for race laps\n  if (lapCount >= 3 && lapCount <= 12) {\n    // Only add time once per lap increment\n    if (lapCount > lastLapCount) {\n      raceTime += lastLapTime;\n      lastLapCount = lapCount;\n    }\n  }\n\n  // Debugging\n  // log(lastLapTime);\n  // log(raceTime);\n\n  // Return the total race time as the output\n  return {\n    data: raceTime,\n  };\n}\n",
+      "sourceCode": "import { Input, Message } from \"./types\";\n\ntype Output = {\n  data: number; // Race time (seconds)\n};\n\n// Input topics\nexport const inputs = [\n  \"/autodrive/roboracer_1/lap_count\",\n  \"/autodrive/roboracer_1/last_lap_time\",\n];\n\n// Output topic\nexport const output = \"/autodrive/roboracer_1/race_time\";\n\n// Variables\nlet lapCount = 0;\nlet lastLapCount = -1; // Track the previous lap count\nlet lastLapTime = 0; // Track the previous lap time\nlet raceTime = 0; // Time elapsed during race laps (1-10)\n\n// Script\nexport default function script(\n  event:\n    | Input<\"/autodrive/roboracer_1/lap_count\">\n    | Input<\"/autodrive/roboracer_1/last_lap_time\">,\n): Output {\n  if (event.topic === \"/autodrive/roboracer_1/lap_count\") {\n    // Read event.message fields expected for /autodrive/roboracer_1/lap_count messages\n    lapCount = (event.message as { data: number }).data;\n  } else {\n    // Read event.message fields expected for /autodrive/roboracer_1/last_lap_time messages\n    lastLapTime = (event.message as { data: number }).data;\n  }\n\n  // Debugging\n  // log(event.message.data);\n\n  // Check time only for race laps\n  if (lapCount >= 3 && lapCount <= 12) {\n    // Only add time once per lap increment\n    if (lapCount > lastLapCount) {\n      raceTime += lastLapTime;\n      lastLapCount = lapCount;\n    }\n  }\n\n  // Debugging\n  // log(lastLapTime);\n  // log(raceTime);\n\n  // Return the total race time as the output\n  return {\n    data: raceTime,\n  };\n}\n",
       "name": "Race Time"
     },
     "125add07-11e4-46e5-8c4e-84954294e443": {
-      "sourceCode": "import { Input, Message } from \"./types\";\n\ntype Output = {\n  data: number; // Adjusted race time (seconds)\n};\n\n// Input topics\nexport const inputs = [\n  \"/autodrive/f1tenth_1/lap_count\",\n  \"/autodrive/f1tenth_1/collision_count\",\n  \"/autodrive/f1tenth_1/last_lap_time\",\n];\n\n// Output topic\nexport const output = \"/autodrive/f1tenth_1/adjusted_race_time\";\n\n// Variables\nlet lapCount = 0; // Current lap count\nlet collisionCount = 0; // Current collision count\nlet collisionsDuringWarmup = 0; // Collisions during warmup lap (0)\nlet collisionsDuringRace = 0; // Collisions during race laps (1-10)\nlet lastLapCount = -1; // Track the previous lap count\nlet lastLapTime = 0; // Track the previous lap time\nlet raceTime = 0; // Time elapsed during race laps (1-10)\nlet adjustedRaceTime = 0; // Race time with penalties\n\n// Script\nexport default function script(\n  event:\n    | Input<\"/autodrive/f1tenth_1/lap_count\">\n    | Input<\"/autodrive/f1tenth_1/collision_count\">\n    | Input<\"/autodrive/f1tenth_1/last_lap_time\">,\n): Output {\n  if (event.topic === \"/autodrive/f1tenth_1/lap_count\") {\n    // Read event.message fields expected for /autodrive/f1tenth_1/lap_count messages\n    lapCount = event.message.data;\n  } else if (event.topic === \"/autodrive/f1tenth_1/collision_count\") {\n    // Read event.message fields expected for /autodrive/f1tenth_1/collision_count messages\n    collisionCount = event.message.data;\n  } else {\n    // Read event.message fields expected for /autodrive/f1tenth_1/last_lap_time messages\n    lastLapTime = event.message.data;\n  }\n\n  // Debugging\n  // log(event.message.data);\n\n  // Calculate collisions only for race laps\n  if (lapCount < 1) {\n    // Ignore collisions during warmup lap (0)\n    collisionsDuringRace = 0;\n    collisionsDuringWarmup = collisionCount;\n  } else if (lapCount >= 1 && lapCount <= 10) {\n    // Calculate collisions during race laps (1 to 10)\n    collisionsDuringRace = collisionCount - collisionsDuringWarmup;\n  }\n\n  // Check time only for race laps\n  if (lapCount >= 3 && lapCount <= 12) {\n    // Only add time once per lap increment\n    if (lapCount > lastLapCount) {\n      raceTime += lastLapTime;\n      lastLapCount = lapCount;\n    }\n  }\n\n  // Calculate adjusted race time\n  if (lapCount > 11) {\n    adjustedRaceTime = raceTime + 10 * collisionsDuringRace;\n  }\n\n  // Debugging\n  // log(collisionsDuringWarmup);\n  // log(collisionsDuringRace);\n  // log(lastLapTime);\n  // log(raceTime);\n  // log(adjustedRaceTime);\n\n  // Return the qualification status as the output\n  return {\n    data: adjustedRaceTime,\n  };\n}\n",
+      "sourceCode": "import { Input, Message } from \"./types\";\n\ntype Output = {\n  data: number; // Adjusted race time (seconds)\n};\n\n// Input topics\nexport const inputs = [\n  \"/autodrive/roboracer_1/lap_count\",\n  \"/autodrive/roboracer_1/collision_count\",\n  \"/autodrive/roboracer_1/last_lap_time\",\n];\n\n// Output topic\nexport const output = \"/autodrive/roboracer_1/adjusted_race_time\";\n\n// Variables\nlet lapCount = 0; // Current lap count\nlet collisionCount = 0; // Current collision count\nlet collisionsDuringWarmup = 0; // Collisions during warmup lap (0)\nlet collisionsDuringRace = 0; // Collisions during race laps (1-10)\nlet lastLapCount = -1; // Track the previous lap count\nlet lastLapTime = 0; // Track the previous lap time\nlet raceTime = 0; // Time elapsed during race laps (1-10)\nlet adjustedRaceTime = 0; // Race time with penalties\n\n// Script\nexport default function script(\n  event:\n    | Input<\"/autodrive/roboracer_1/lap_count\">\n    | Input<\"/autodrive/roboracer_1/collision_count\">\n    | Input<\"/autodrive/roboracer_1/last_lap_time\">,\n): Output {\n  if (event.topic === \"/autodrive/roboracer_1/lap_count\") {\n    // Read event.message fields expected for /autodrive/roboracer_1/lap_count messages\n    lapCount = (event.message as { data: number }).data;\n  } else if (event.topic === \"/autodrive/roboracer_1/collision_count\") {\n    // Read event.message fields expected for /autodrive/roboracer_1/collision_count messages\n    collisionCount = (event.message as { data: number }).data;\n  } else {\n    // Read event.message fields expected for /autodrive/roboracer_1/last_lap_time messages\n    lastLapTime = (event.message as { data: number }).data;\n  }\n\n  // Debugging\n  // log(event.message.data);\n\n  // Calculate collisions only for race laps\n  if (lapCount < 1) {\n    // Ignore collisions during warmup lap (0)\n    collisionsDuringRace = 0;\n    collisionsDuringWarmup = collisionCount;\n  } else if (lapCount >= 1 && lapCount <= 10) {\n    // Calculate collisions during race laps (1 to 10)\n    collisionsDuringRace = collisionCount - collisionsDuringWarmup;\n  }\n\n  // Check time only for race laps\n  if (lapCount >= 3 && lapCount <= 12) {\n    // Only add time once per lap increment\n    if (lapCount > lastLapCount) {\n      raceTime += lastLapTime;\n      lastLapCount = lapCount;\n    }\n  }\n\n  // Calculate adjusted race time\n  if (lapCount > 11) {\n    adjustedRaceTime = raceTime + 10 * collisionsDuringRace;\n  }\n\n  // Debugging\n  // log(collisionsDuringWarmup);\n  // log(collisionsDuringRace);\n  // log(lastLapTime);\n  // log(raceTime);\n  // log(adjustedRaceTime);\n\n  // Return the qualification status as the output\n  return {\n    data: adjustedRaceTime,\n  };\n}\n",
       "name": "Adjusted Race Time"
     }
   },
