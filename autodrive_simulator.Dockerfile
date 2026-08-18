@@ -5,18 +5,16 @@
 ####################################################
 
 # Set base image and environment variables
-FROM nvidia/vulkan:1.1.121-cuda-10.1--ubuntu18.04
+FROM ubuntu:22.04
 
-# Add CUDA repository key
-RUN rm /etc/apt/sources.list.d/cuda.list
-RUN rm /etc/apt/sources.list.d/nvidia-ml.list
-RUN apt-key del 7fa2af80
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub
+ENV DEBIAN_FRONTEND=noninteractive
+ENV NVIDIA_DRIVER_CAPABILITIES=graphics,utility,compute,display
+ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 
 # Install Debian packages
-RUN apt update \
-    && apt install -y --no-install-recommends \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
         sudo \
         wget \
         gedit \
@@ -26,10 +24,32 @@ RUN apt update \
         unzip \
         net-tools \
         libvulkan1 \
+        mesa-vulkan-drivers \
+        vulkan-tools \
+        libgl1 \
+        libgl1-mesa-dri \
+        libegl1 \
+        libgbm1 \
+        libdrm2 \
+        libglvnd0 \
+        mesa-utils \
+        libglu1-mesa \
+        libgtk-3-0 \
+        libnss3 \
+        libx11-6 \
+        libxcursor1 \
+        libxi6 \
+        libxinerama1 \
+        libxrandr2 \
+        libxss1 \
+        libxxf86vm1 \
+        libasound2 \
+        libpulse0 \
         libc++1 \
         libc++abi1 \
-        vulkan-utils \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p "${XDG_RUNTIME_DIR}" \
+    && chmod 700 "${XDG_RUNTIME_DIR}"
 
 # Install tools for display
 RUN apt update --fix-missing \
