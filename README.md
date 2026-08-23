@@ -32,7 +32,7 @@ docker build --tag autodriveecosystem/autodrive_roboracer_sim:<TAG> -f autodrive
 
 ```bash
 xhost local:root
-docker run --name autodrive_roboracer_sim --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp.X11-umix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_sim:<TAG>
+docker run --name autodrive_roboracer_sim --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_sim:<TAG>
 ```
 
 ### Push:
@@ -40,7 +40,7 @@ docker run --name autodrive_roboracer_sim --rm -it --entrypoint /bin/bash --netw
 1. Run the image you created in the previous step inside a container:
 ```bash
 xhost local:root
-docker run --name autodrive_roboracer_sim --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp.X11-umix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_sim:<TAG>
+docker run --name autodrive_roboracer_sim --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_sim:<TAG>
 ```
 
 2. In a new terminal window, list all containers and make a note of the desired `CONTAINER ID`:
@@ -78,7 +78,7 @@ docker build --tag autodriveecosystem/autodrive_roboracer_api:<TAG> -f autodrive
 
 ```bash
 xhost local:root
-docker run --name autodrive_roboracer_api --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp.X11-umix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_api:<TAG>
+docker run --name autodrive_roboracer_api --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_api:<TAG>
 ```
 
 ### Push:
@@ -86,7 +86,7 @@ docker run --name autodrive_roboracer_api --rm -it --entrypoint /bin/bash --netw
 1. Run the image you created in the previous step inside a container:
 ```bash
 xhost local:root
-docker run --name autodrive_roboracer_api --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp.X11-umix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_api:<TAG>
+docker run --name autodrive_roboracer_api --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_api:<TAG>
 ```
 
 2. In a new terminal window, list all containers and make a note of the desired `CONTAINER ID`:
@@ -119,13 +119,13 @@ docker pull <TEAM_USERNAME>/<IMAGE_NAME>:<TAG>
 2. Run the team's image you pulled in the previous step inside a container:
 ```bash
 xhost local:root
-docker run --name autodrive_roboracer_api --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp.X11-umix:rw --env DISPLAY --privileged --gpus all <TEAM_USERNAME>/<IMAGE_NAME>:<TAG>
+docker run --name autodrive_roboracer_api --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env DISPLAY --privileged --gpus all <TEAM_USERNAME>/<IMAGE_NAME>:<TAG>
 ```
 
 3. Run the simulator image inside a container, set graphics to `Ultra` quality and vehicle in `Autonomous` mode:
 ```bash
 xhost local:root
-docker run --name autodrive_roboracer_sim --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp.X11-umix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_sim:<TAG>
+docker run --name autodrive_roboracer_sim --rm -it --entrypoint /bin/bash --network=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env DISPLAY --privileged --gpus all autodriveecosystem/autodrive_roboracer_sim:<TAG>
 ```
 
 4. Begin screen recording (tested with [OBS Studio](https://obsproject.com)).
