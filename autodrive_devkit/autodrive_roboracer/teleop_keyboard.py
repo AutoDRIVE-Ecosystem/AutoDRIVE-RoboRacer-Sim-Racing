@@ -33,7 +33,7 @@ import rclpy # ROS 2 client library (rcl) for Python (built on rcl C API)
 from rclpy.qos import QoSProfile # Ouality of Service (tune communication between nodes)
 from std_msgs.msg import Float32, Bool # Float32 and Bool message classes
 
-# Python mudule imports
+# Python module imports
 import os # Miscellaneous operating system interfaces
 import select # Waiting for I/O completion
 import sys # System-specific parameters and functions
