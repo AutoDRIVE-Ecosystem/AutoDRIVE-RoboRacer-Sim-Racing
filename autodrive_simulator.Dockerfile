@@ -12,8 +12,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES=graphics,utility,compute,display
 ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 
 # Install Debian packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+RUN apt update \
+    && apt install -y --no-install-recommends \
         ca-certificates \
         sudo \
         wget \
